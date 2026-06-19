@@ -1,7 +1,7 @@
 Codifica un artículo científico contra el Codebook CFIR 2.0 + NPT de la tesis
 sobre implementación de Atención Centrada en la Persona (PCC)/humanización en
 salud, y escribe los resultados en el Google Sheet
-**"Codebook_CFIR2_NPT_Integrado_36estudios"**
+**"Codebook_CFIR2_NPT_Integrado_60estudios"**
 (`fileId = 1rRuk_DBPV5RgdalaF_R90uOXf_DTiPPBbWwdAaS0AzE`).
 
 Argumento: `$ARGUMENTS` = ruta al archivo `.md` del artículo (típicamente
@@ -57,7 +57,7 @@ p. ej. resultados clínicos sin relación con el proceso de implementación).
 2. **Numeración correlativa de estudios**: antes de codificar, revisa la
    Hoja de Trabajo y las Matrices (Hojas 4-6) para determinar el último
    `EST-XXX` usado, y asigna el siguiente correlativo (`EST-001` →
-   `EST-036`, extensible más allá de 036 si el usuario sigue subiendo
+   `EST-060`, extensible más allá de 060 si el usuario sigue subiendo
    artículos). Si `$ARGUMENTS` trae un `EST-XXX` explícito, verifica que no
    esté ya usado antes de proceder; si ya existe, detente y pregunta al
    usuario cómo proceder (no sobrescribas silenciosamente).
@@ -108,12 +108,18 @@ p. ej. resultados clínicos sin relación con el proceso de implementación).
    de Notas, incluso si no encajan perfectamente en un solo constructo.
 
 ═══════════════════════════════════════════════════════════════════
-## 2. Pipeline de 7 pasos
+## 2. Pipeline de 8 pasos
 
 1. **Preparación de metadatos**: lee `$ARGUMENTS`, extrae autor(es)/año,
    país/contexto, tipo de estudio (cualitativo/cuantitativo/mixto), tipo de
    servicio/Inner Setting, modelo PCC implementado, duración de la
-   implementación. Asigna `EST-XXX` (regla 2).
+   implementación. Asigna `EST-XXX` (regla 2). Extrae también, con la misma
+   fidelidad anti-invención de la regla 3, los campos que alimentarán la
+   Matriz de Resultados (§5.4): objetivo del estudio, características de la
+   población, tamaño de la muestra, intervención/innovación, tipo de
+   institución (pública/privada) y contexto de la institución
+   (hospitalaria/ambulatoria). Si alguno no se reporta explícitamente en el
+   artículo, regístralo como "No reportado" — nunca lo infieras.
 
 2. **Lectura deductiva CFIR 2.0**: recorre el artículo completo aplicando el
    checklist de constructos CFIR del §3 (Innovation, Outer Setting, Inner
@@ -147,6 +153,13 @@ p. ej. resultados clínicos sin relación con el proceso de implementación).
 7. **Síntesis**: redacta la Ficha por Estudio completa (§5) en español,
    incluyendo el análisis integrado que conecta hallazgos CFIR + NPT con la
    pregunta central de la tesis.
+
+8. **Registro en Matriz de Resultados**: con los campos extraídos en el paso
+   1 y los hallazgos/limitaciones del estudio (extraídos textualmente del
+   artículo, p. ej. de las secciones Results/Discussion/Limitations), llena
+   la fila `EST-XXX` de la Matriz de Resultados (Hoja 8, §5.4) con las 12
+   columnas requeridas. Igual que en el resto del pipeline: sin evidencia
+   textual razonable → "No reportado", nunca inventado.
 
 ═══════════════════════════════════════════════════════════════════
 ## 3. Checklist de constructos (lista real, verificada contra la Hoja 2 — 69 ítems)
@@ -269,10 +282,10 @@ Fragmento de texto | Marco (CFIR/NPT) | Código | Constructo | Dominio |
 Dirección (+/0/-) | Rating (-2/+2) | Segundo código (si aplica) | Relación entre
 códigos | Código inductivo (IND-EMG-) | Notas/Justificación rating`
 
-### 5.2 Matriz CFIR × 36 estudios (Hoja 5) y Matriz NPT × 36 estudios (Hoja 6)
+### 5.2 Matriz CFIR × 60 estudios (Hoja 5) y Matriz NPT × 60 estudios (Hoja 6)
 Cada fila = un constructo del §3 (saltando las filas de encabezado de dominio
 tipo "▶ INNOVATION", que son separadores visuales, no constructos). Columnas
-`EST-001…EST-036` + 3 columnas de síntesis al final: `N estudios reportados`,
+`EST-001…EST-060` + 3 columnas de síntesis al final: `N estudios reportados`,
 `Rating promedio`, `Patrón global`. Al codificar el artículo EST-XXX, escribe
 el rating (o "NA") en la columna correspondiente de cada fila de constructo
 evaluado.
@@ -280,7 +293,7 @@ evaluado.
 ### 5.3 Ficha por Estudio (Hoja 7) — una sección nueva por artículo, en español
 ```
 ═══ IDENTIFICACIÓN DEL ESTUDIO ═══
-ID del estudio (EST-001 a EST-036):
+ID del estudio (EST-001 a EST-060):
 Autor(es) y Año:
 Título del artículo:
 Revista / DOI:
@@ -316,11 +329,24 @@ Fecha de codificación:
 Segunda codificación por:
 ```
 
-### 5.4 Limitación de escritura conocida
+### 5.4 Matriz de Resultados (Hoja 8) — una fila por estudio, en español
+Columnas (13): `ID Estudio | Autor(es) | Año de publicación | País(es) de
+origen | Objetivo del estudio | Tipo de estudio (metodología) |
+Características de la población | Tamaño de la muestra | Intervención /
+Innovación | Tipo de institución (pública/privada) | Contexto de la
+institución (hospitalaria/ambulatoria) | Hallazgos y/o resultados del
+estudio | Limitaciones del estudio`. La fila `EST-XXX` ya existe
+pre-creada en el Sheet (filas EST-001 a EST-060); solo completa las 12
+columnas restantes con lo extraído en el paso 1 y paso 8 del pipeline.
+Mismas reglas anti-invención: "No reportado" si el artículo no lo
+especifica.
+
+### 5.5 Limitación de escritura conocida
 Las herramientas de Drive disponibles (`mcp__Google_Drive__*`) no exponen
 edición célula a célula de un Google Sheet existente. El comando debe:
 - Generar el bloque completo (Hoja de Trabajo + filas de Matriz + Ficha por
-  Estudio) en formato tabular listo para copiar/pegar en el Sheet.
+  Estudio + fila de Matriz de Resultados) en formato tabular listo para
+  copiar/pegar en el Sheet.
 - Intentar, si existe alguna herramienta de escritura disponible en la
   sesión (verificar con ToolSearch antes de descartarlo), anexar el
   contenido directamente.
@@ -336,5 +362,7 @@ Al terminar, imprime:
 - Lista de constructos con evidencia positiva (rating ≠ 0/NA) vs. constructos
   marcados NA.
 - Códigos inductivos nuevos creados (si los hay).
+- Confirmación de que la fila `EST-XXX` de la Matriz de Resultados (§5.4)
+  quedó completa, señalando qué campos quedaron como "No reportado".
 - Si `EST-XXX` ≤ EST-004: recordatorio de calibración inter-observador
   (κ≥0.70) pendiente.

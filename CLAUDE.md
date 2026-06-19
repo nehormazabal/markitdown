@@ -8,7 +8,7 @@ repo no es el código fuente de la herramienta `markitdown` en sí, sino:
 1. Convertir artículos científicos (PDF → `.md`) con `markitdown`.
 2. Codificar cada artículo `.md` contra un marco teórico CFIR 2.0 + NPT
    usando el comando `/codificar-articulo`, y registrar los resultados en
-   el Google Sheet **"Codebook_CFIR2_NPT_Integrado_36estudios"**
+   el Google Sheet **"Codebook_CFIR2_NPT_Integrado_60estudios"**
    (`fileId = 1rRuk_DBPV5RgdalaF_R90uOXf_DTiPPBbWwdAaS0AzE`).
 
 No modificar el código fuente de `markitdown` como parte de estas tareas de
@@ -20,16 +20,16 @@ codificación, salvo que el usuario lo pida explícitamente.
 rol experto (CFIR 2.0, NPT, análisis cualitativo deductivo-inductivo),
 reglas duras del proyecto, checklist de 69 constructos (verificado contra
 la Hoja 2 real del Sheet — la Portada del Sheet dice "57" pero esa cifra
-está desactualizada, no usarla), pipeline de 7 pasos, sistema de rating y
+está desactualizada, no usarla), pipeline de 8 pasos, sistema de rating y
 plantillas de salida (Hoja de Trabajo, Matrices CFIR/NPT, Ficha por
-Estudio).
+Estudio, Matriz de Resultados con metadatos/hallazgos de los 60 estudios).
 
 ## Reglas duras del proyecto (resumen — el detalle vive en el comando)
 
 - Todo el contenido escrito en las celdas del codebook/Sheet va **en
   español**, incluso si el artículo fuente está en otro idioma. Las citas
   textuales del fragmento original pueden mantenerse en su idioma.
-- Los artículos se codifican con un ID correlativo `EST-001` → `EST-036`
+- Los artículos se codifican con un ID correlativo `EST-001` → `EST-060`
   (extensible), nunca se reutiliza ni se saltea un número sin revisar el
   Sheet primero.
 - **Fidelidad sin invención**: cada código debe respaldarse en un fragmento
